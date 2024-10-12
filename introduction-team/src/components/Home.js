@@ -1,22 +1,24 @@
 import React from 'react';
 import '../css/Home.css';
 import { Link } from 'react-router-dom';
-import Teaminfo from './Teaminfo'
+
 
 const Home = () => {
   return (
-    <div>
-      <h2>Welcome to my team</h2>
-      <div className='card'>
-        <img src='https://initiatesgroup.com/wp-content/uploads/who-we-are.png'className='card-image-top' alt='card-img'/>
-        <div className='card-body'>
-          <h5 className='card-title'>Team information</h5>
-          <p className='card-text'>Know more about us</p>
-          <Link to={Teaminfo} class="btn btn-primary"> Click here </Link>
-        </div>
+    <div className="Home">
+      <h1>Welcome To HBK Team</h1>
+      <h2>Discover more!</h2>
+      <div className="btn-functions">
+        <Link to="/Teaminfo"> 
+          <button type="button" className="btn btn-custom btn-lg">About Us</button>
+        </Link>     
+
+        <Link to="/projects"> 
+          <button type="button" className="btn btn-custom btn-lg">Team Rule</button>
+        </Link>    
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
