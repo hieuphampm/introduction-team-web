@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
-/* Global styles */
 body {
     background-image: linear-gradient(to right, #0D47A1, #4A148C);
     color: #E0E0E0;
@@ -12,22 +11,21 @@ body {
     font-family: "Source Code Pro", monospace;
     font-optical-sizing: auto;
   }
-  
-  /* Row styling */
+
   .row {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
   }
-  
-  /* Card styling */
+
   .card {
     background-color: #444;
     border: none;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease-in-out;
+    margin-bottom: 20px;
   }
   
   .card:hover {
@@ -36,9 +34,9 @@ body {
   
   .card-body {
     padding: 20px;
+    text-align: center;
   }
-  
-  /* Title and text */
+
   .card-title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -50,9 +48,8 @@ body {
     margin-bottom: 20px;
   }
   
-  /* Button styling */
   .btn-custom {
-    background-color: #4CAF50;
+    background-color: #512DA8;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -62,6 +59,6 @@ body {
   }
   
   .btn-custom:hover {
-    background-color: #45a049;
+    background-color: #7B1FA2;
   }
-  
+ 
