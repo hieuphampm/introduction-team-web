@@ -1,9 +1,9 @@
 import React from 'react';
-import './Khoa.css';
+import '../css/Khoa.css';
 import avatar from '../avatar/Kho.jpg';
 import { Link } from 'react-router-dom';
 
-const MyInfo = () => {
+const KhoaInfo = () => {
   return (
     <div className="info-container slide-in">
       <div className="nav-bar">
