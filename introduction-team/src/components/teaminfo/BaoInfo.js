@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import avatar from '../avatar/Baovjp.jpg';
 
 const styles = {
   container: (isDarkMode) => ({
@@ -89,7 +91,8 @@ const Sidebar = ({ isOpen, toggleSidebar, scrollToSection, currentSection }) => 
 const Header = () => (
   <header id="home" style={{ marginBottom: '10px', textAlign: 'center' }}>
     <img
-      src="422883234_1075214080296363_6108668660987587859_n.jpg" 
+      src={avatar}
+      alt="Peter Bao"
       style={{
         borderRadius: '50%',
         width: '150px',
@@ -97,7 +100,6 @@ const Header = () => (
         objectFit: 'cover', 
         marginBottom: '10px',
       }}
-      alt="Profile"
     />
     <h1 className="w3-jumbo" style={{ fontSize: '2rem' }}>
       <b>Peter Bao</b>
