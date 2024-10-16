@@ -6,7 +6,7 @@ const styles = {
       ? 'linear-gradient(to right, #2a2a2a, #3a3a3a)'
       : 'linear-gradient(to right, #1e3c72, #2a5298)',
     color: isDarkMode ? 'white' : 'black',
-    height: '100vh',
+    height: '0vh',
     fontFamily: "'Poppins', sans-serif",
     display: 'flex',
     flexDirection: 'column',
