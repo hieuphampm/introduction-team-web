@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const styles = {
   container: (isDarkMode) => ({
-    background: isDarkMode ? 'linear-gradient(to right, #2a2a2a, #3a3a3a)' : 'linear-gradient(to right, #1e3c72, #2a5298)',
+    background: isDarkMode
+      ? 'linear-gradient(to right, #2a2a2a, #3a3a3a)'
+      : 'linear-gradient(to right, #1e3c72, #2a5298)',
     color: isDarkMode ? 'white' : 'black',
     height: '100vh',
     fontFamily: "'Poppins', sans-serif",
@@ -12,6 +14,15 @@ const styles = {
     justifyContent: 'flex-start',
     padding: '0',
   }),
+  button: {
+    backgroundColor: '#ff5722',
+    padding: '10px',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    marginTop: '10px',
+  },
   sidebar: (isSidebarOpen) => ({
     width: isSidebarOpen ? '300px' : '0',
     height: '100vh',
@@ -21,30 +32,14 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    paddingTop: '20px',
+    paddingTop: '60px',
   }),
-  button: {
-    width: '80%',
-    maxWidth: '300px',
-    padding: '8px',
-    fontSize: '0.9rem',
-    background: 'transparent',
-    border: '2px solid white',
-    cursor: 'pointer',
-    color: 'white',
-    marginBottom: '8px',
-  },
   mainContent: {
-    width: '80%',
-    maxWidth: '900px',
+    width: '100%',
+    maxWidth: '1000px',
     padding: '16px 0',
     textAlign: 'center',
     marginTop: '0',
-  },
-  iconButton: {
-    background: 'transparent',
-    border: 'none',
-    cursor: 'pointer',
   },
   themeToggleButton: {
     marginBottom: '20px',
@@ -54,6 +49,11 @@ const styles = {
     borderRadius: '5px',
     cursor: 'pointer',
     color: 'white',
+  },
+  imageContainer: {
+    marginTop: '20px',
+    display: 'flex',
+    justifyContent: 'center',
   },
 };
 
@@ -65,10 +65,10 @@ const NavigationButton = ({ label, onClick }) => (
 
 const Sidebar = ({ isOpen, toggleSidebar, scrollToSection, currentSection }) => (
   <nav style={styles.sidebar(isOpen)}>
-    <button onClick={toggleSidebar} style={styles.iconButton} aria-label="Close sidebar">
-      <i className="fa fa-remove" style={{ fontSize: '2rem', color: 'white' }}></i>
+    <button onClick={toggleSidebar} style={{ background: 'none', border: 'none', color: 'white', fontSize: '2rem' }} aria-label="Close sidebar">
+      &times;
     </button>
-    <div style={{ marginTop: '20px', width: '100%' }}>
+    <div style={{ marginTop: '10px', width: '100%' }}>
       {['home', 'portfolio', 'about', 'contact'].map((item) => (
         <NavigationButton
           key={item}
@@ -87,7 +87,18 @@ const Sidebar = ({ isOpen, toggleSidebar, scrollToSection, currentSection }) => 
 );
 
 const Header = () => (
-  <header id="home" style={{ marginBottom: '10px' }}>
+  <header id="home" style={{ marginBottom: '10px', textAlign: 'center' }}>
+    <img
+      src="422883234_1075214080296363_6108668660987587859_n.jpg" 
+      style={{
+        borderRadius: '50%',
+        width: '150px',
+        height: '150px',
+        objectFit: 'cover', 
+        marginBottom: '10px',
+      }}
+      alt="Profile"
+    />
     <h1 className="w3-jumbo" style={{ fontSize: '2rem' }}>
       <b>Peter Bao</b>
     </h1>
@@ -210,14 +221,12 @@ const BaoInfo = () => {
       const element = document.getElementById(section);
       if (element) {
         const { top } = element.getBoundingClientRect();
-        if (top <= window.innerHeight / 2 && top > 0) {
+        if (top >= 0 && top <= window.innerHeight) {
           setCurrentSection(section);
         }
       }
     });
   };
-
-  const handleThemeToggle = () => setDarkMode((prev) => !prev);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -226,24 +235,19 @@ const BaoInfo = () => {
 
   return (
     <div style={styles.container(isDarkMode)}>
-      <button style={styles.themeToggleButton} onClick={handleThemeToggle}>
-        Toggle Dark Mode
-      </button>
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} scrollToSection={scrollToSection} currentSection={currentSection} />
+      <button onClick={toggleSidebar} style={styles.button}>
+        ☰ Menu
+      </button>
+      <button onClick={() => setDarkMode((prev) => !prev)} style={styles.themeToggleButton}>
+        {isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+      </button>
       <Header />
       <div style={styles.mainContent}>
         <Portfolio />
         <About />
         <Contact />
       </div>
-      <button
-        style={{
-          display: 'none',
-        }}
-        aria-label="Scroll to top"
-      >
-        ↑
-      </button>
     </div>
   );
 };
