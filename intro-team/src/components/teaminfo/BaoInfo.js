@@ -1,73 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Ensure this is only declared once
+import { Link } from 'react-router-dom'; 
 import avatar from '../avatar/Baovjp.jpg';
 import '../css/Bao.css';
 
-const styles = {
-  container: (isDarkMode) => ({
-    background: isDarkMode
-      ? 'linear-gradient(to right, #2a2a2a, #3a3a3a)'
-      : 'linear-gradient(to right, #1e3c72, #2a5298)',
-    color: isDarkMode ? 'white' : 'black',
-    height: '100vh', // Change this to 100vh to fill the screen
-    fontFamily: "'Poppins', sans-serif",
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    padding: '0',
-  }),
-  button: {
-    backgroundColor: '#ff5722',
-    padding: '10px',
-    color: 'white',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    marginTop: '10px',
-  },
-  sidebar: (isOpen) => ({
-    width: isOpen ? '300px' : '0',
-    height: '100vh',
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    transition: 'width 0.3s ease-in-out',
-    overflowX: 'hidden',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    paddingTop: '60px',
-  }),
-  mainContent: {
-    width: '100%',
-    maxWidth: '1000px',
-    padding: '16px 0',
-    textAlign: 'center',
-    marginTop: '0',
-  },
-  themeToggleButton: {
-    marginBottom: '20px',
-    backgroundColor: '#ff5722',
-    border: 'none',
-    padding: '8px',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    color: 'white',
-  },
-  imageContainer: {
-    marginTop: '20px',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-};
-
 const NavigationButton = ({ label, onClick }) => (
-  <button onClick={onClick} style={styles.button}>
+  <button onClick={onClick} className="button">
     {label}
   </button>
 );
 
 const Sidebar = ({ isOpen, toggleSidebar, scrollToSection, currentSection }) => (
-  <nav style={styles.sidebar(isOpen)}>
+  <nav className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
     <button onClick={toggleSidebar} style={{ background: 'none', border: 'none', color: 'white', fontSize: '2rem' }} aria-label="Close sidebar">
       &times;
     </button>
@@ -94,28 +37,14 @@ const Header = () => (
     <img
       src={avatar}
       alt="Peter Bao"
-      style={{
-        borderRadius: '50%',
-        width: '150px',
-        height: '150px',
-        objectFit: 'cover', 
-        marginBottom: '10px',
-      }}
+      className="image-container"
     />
     <h1 className="w3-jumbo" style={{ fontSize: '2rem' }}>
       <b>Peter Bao</b>
     </h1>
     <p style={{ fontSize: '1rem' }}>The Best Coder in the World.</p>
     <button
-      style={{
-        backgroundColor: '#4caf50',
-        color: 'white',
-        padding: '8px 16px',
-        border: 'none',
-        cursor: 'pointer',
-        fontSize: '1rem',
-        marginTop: '10px',
-      }}
+      className="button"
       onMouseOver={(e) => (e.target.style.backgroundColor = '#45a049')}
       onMouseOut={(e) => (e.target.style.backgroundColor = '#4caf50')}
     >
@@ -134,7 +63,6 @@ const Portfolio = () => (
       <li>📊 Project 2: Make a Small AI for Talking</li>
       <li>💻 Project 3: Mobile Application</li>
     </ul>
-
     <div style={{ marginTop: '20px' }}>
       <h3 style={{ fontSize: '1.2rem' }}>Languages and Tools Used</h3>
       <hr style={{ border: '1px solid #fff', width: '40%' }} />
@@ -201,7 +129,7 @@ const Contact = () => {
           rows="3"
           style={{ marginRight: '5px', padding: '5px' }}
         />
-        <button type="submit" style={styles.button}>Send</button>
+        <button type="submit" className="button">Send</button>
       </form>
     </section>
   );
@@ -235,9 +163,9 @@ const BaoInfo = () => {
   }, []);
 
   return (
-    <div style={styles.container(isDarkMode)}>
+    <div className={`container ${isDarkMode ? 'dark' : 'light'}`}>
       <Header />
-      <button onClick={toggleSidebar} style={styles.themeToggleButton}>
+      <button onClick={toggleSidebar} className="theme-toggle-button">
         Toggle Sidebar
       </button>
       <Sidebar
@@ -246,15 +174,13 @@ const BaoInfo = () => {
         scrollToSection={scrollToSection}
         currentSection={currentSection}
       />
-      <div style={styles.mainContent}>
+      <div className="main-content">
         <Portfolio />
         <About />
         <Contact />
       </div>
       <Link to={-1} className="navbar-link">
-        <button style={styles.button}>
-          Turn Back
-        </button>
+        <button className="button">Turn Back</button>
       </Link>
       <form>
         <input type="button" value="Go back!" onClick={() => window.history.back()} />
@@ -262,17 +188,5 @@ const BaoInfo = () => {
     </div>
   );
 };
-
-
-const buttonContainer = document.getElementById('button-container');
-
-const homeButton = document.createElement('button');
-homeButton.textContent = 'Quay về trang chủ';
-homeButton.className = 'home-button';
-homeButton.onclick = function() {
-    window.location.href = 'index.html';
-};
-
-buttonContainer.appendChild(homeButton);
 
 export default BaoInfo;
