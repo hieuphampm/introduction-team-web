@@ -43,13 +43,16 @@ const Header = () => (
       <b>Peter Bao</b>
     </h1>
     <p style={{ fontSize: '1rem' }}>The Best Coder in the World.</p>
-    <button
-      className="button"
-      onMouseOver={(e) => (e.target.style.backgroundColor = '#45a049')}
-      onMouseOut={(e) => (e.target.style.backgroundColor = '#4caf50')}
-    >
-      <i className="fa fa-download"></i> HBK' Team Member
-    </button>
+    <Link to="/Teaminfo">
+      <button
+        className="button"
+        onMouseOver={(e) => (e.target.style.backgroundColor = '#45a049')}
+        onMouseOut={(e) => (e.target.style.backgroundColor = '#4caf50')}
+      >
+        <i className="fa fa-download"></i> HBK' Team Member
+      </button>
+    </Link>
+    
   </header>
 );
 
