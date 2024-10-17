@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Ensure this is only declared once
 import avatar from '../avatar/Baovjp.jpg';
+import '../css/Bao.css';
 
 const styles = {
   container: (isDarkMode) => ({
@@ -8,7 +9,7 @@ const styles = {
       ? 'linear-gradient(to right, #2a2a2a, #3a3a3a)'
       : 'linear-gradient(to right, #1e3c72, #2a5298)',
     color: isDarkMode ? 'white' : 'black',
-    height: '0vh',
+    height: '100vh', // Change this to 100vh to fill the screen
     fontFamily: "'Poppins', sans-serif",
     display: 'flex',
     flexDirection: 'column',
@@ -25,8 +26,8 @@ const styles = {
     cursor: 'pointer',
     marginTop: '10px',
   },
-  sidebar: (isSidebarOpen) => ({
-    width: isSidebarOpen ? '300px' : '0',
+  sidebar: (isOpen) => ({
+    width: isOpen ? '300px' : '0',
     height: '100vh',
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
     transition: 'width 0.3s ease-in-out',
@@ -220,12 +221,10 @@ const BaoInfo = () => {
   const handleScroll = () => {
     const sections = ['home', 'portfolio', 'about', 'contact'];
     sections.forEach((section) => {
-      const element = document.getElementById(section);
-      if (element) {
-        const { top } = element.getBoundingClientRect();
-        if (top >= 0 && top <= window.innerHeight) {
-          setCurrentSection(section);
-        }
+      const sectionElement = document.getElementById(section);
+      const rect = sectionElement.getBoundingClientRect();
+      if (rect.top >= 0 && rect.top < window.innerHeight) {
+        setCurrentSection(section);
       }
     });
   };
@@ -237,21 +236,43 @@ const BaoInfo = () => {
 
   return (
     <div style={styles.container(isDarkMode)}>
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} scrollToSection={scrollToSection} currentSection={currentSection} />
-      <button onClick={toggleSidebar} style={styles.button}>
-        ☰ Menu
-      </button>
-      <button onClick={() => setDarkMode((prev) => !prev)} style={styles.themeToggleButton}>
-        {isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
-      </button>
       <Header />
+      <button onClick={toggleSidebar} style={styles.themeToggleButton}>
+        Toggle Sidebar
+      </button>
+      <Sidebar
+        isOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
+        scrollToSection={scrollToSection}
+        currentSection={currentSection}
+      />
       <div style={styles.mainContent}>
         <Portfolio />
         <About />
         <Contact />
       </div>
+      <Link to={-1} className="navbar-link">
+        <button style={styles.button}>
+          Turn Back
+        </button>
+      </Link>
+      <form>
+        <input type="button" value="Go back!" onClick={() => window.history.back()} />
+      </form>
     </div>
   );
 };
+
+
+const buttonContainer = document.getElementById('button-container');
+
+const homeButton = document.createElement('button');
+homeButton.textContent = 'Quay về trang chủ';
+homeButton.className = 'home-button';
+homeButton.onclick = function() {
+    window.location.href = 'index.html';
+};
+
+buttonContainer.appendChild(homeButton);
 
 export default BaoInfo;
